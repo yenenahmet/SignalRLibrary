@@ -23,15 +23,15 @@ public class SignalRFuture<V> implements Future<V> {
     boolean mIsCancelled = false;
     boolean mIsDone = false;
     private V mResult = null;
-    private List<Runnable> mOnCancelled = new ArrayList<Runnable>();
-    private List<Action<V>> mOnDone = new ArrayList<Action<V>>();
-    private Object mDoneLock = new Object();
-    private List<ErrorCallback> mErrorCallback = new ArrayList<ErrorCallback>();
-    private Queue<Throwable> mErrorQueue = new ConcurrentLinkedQueue<Throwable>();
-    private Object mErrorLock = new Object();
+    private final List<Runnable> mOnCancelled = new ArrayList<Runnable>();
+    private final List<Action<V>> mOnDone = new ArrayList<Action<V>>();
+    private final Object mDoneLock = new Object();
+    private final List<ErrorCallback> mErrorCallback = new ArrayList<ErrorCallback>();
+    private final Queue<Throwable> mErrorQueue = new ConcurrentLinkedQueue<Throwable>();
+    private final Object mErrorLock = new Object();
     private Throwable mLastError = null;
 
-    private Semaphore mResultSemaphore = new Semaphore(0);
+    private final Semaphore mResultSemaphore = new Semaphore(0);
 
     /**
      * Handles the cancellation event
