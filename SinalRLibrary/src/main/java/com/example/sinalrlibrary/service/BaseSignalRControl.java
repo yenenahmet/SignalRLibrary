@@ -120,6 +120,21 @@ public class BaseSignalRControl {
                 ), resultClass);
     }
 
+    public <T> void listenEvent(@NonNull final ListenEventListener<T> listener,
+                                @NonNull final String eventName,
+                                @NonNull final Class<T> resultClass) {
+        mHubProxy.on(eventName, (SubscriptionHandler1<T>) p1 ->
+                handler.post(() -> {
+                            if (debug) {
+                                Log.e(TAG, p1.toString());
+                            }
+                            if (p1 != null) {
+                                listener.onResult(p1);
+                            }
+                        }
+                ), resultClass);
+    }
+
     public void setConnectionEventListener(@NonNull ConnectionListener listener) {
         this.connectionEventListener = listener;
     }
