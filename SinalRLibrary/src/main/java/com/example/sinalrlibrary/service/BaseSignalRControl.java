@@ -82,7 +82,7 @@ public class BaseSignalRControl {
                 if (debug) {
                     Log.e(TAG, error.toString());
                 }
-                signalRListener.onError((Exception) error);
+                handler.post(() -> signalRListener.onError((Exception) error));
             });
         } else {
             signalRListener.onError(new Exception("Not Connected"));
