@@ -36,7 +36,7 @@ public class BaseSignalRControl {
         this.debug = debug;
     }
 
-    private void startSignalR() {
+    public void startSignalR() {
         Platform.loadPlatformComponent(new AndroidPlatformComponent());
 
         final ClientTransport clientTransport = new ServerSentEventsTransport(mHubConnection.getLogger());
